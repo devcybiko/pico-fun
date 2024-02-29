@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 #
 # makepico.zsh
@@ -10,7 +10,7 @@
 # @version   2.2.0
 # @license   MIT
 #
-
+# hacked up a bit by Gregory Smith - 2023
 
 # FROM 1.0.2
 # Check that PICO_SDK_PATH is defined
@@ -57,15 +57,18 @@ make_project() {
 
     # Copy over the .make file from the SDK
     file="pico_sdk_import.cmake"
-    if cp "${PICO_SDK_PATH}/external/${file}" "${project_path}/${file}"; then
-        # NOP
-    else
+    cp "${PICO_SDK_PATH}/external/${file}" "${project_path}/${file}"
+    status=$?
+    if [[ "$status" != "0" ]]; then
         echo "Error - could not copy the ${file} file"
         exit 1
     fi
 
     # Make the CMakeLists.txt file for this project
     make_cmake_file "${1}"
+
+    # make the build.sh script
+    create_make_sh "${1}"
 
     # FROM 1.0.2
     make_vscode "${1}"
@@ -293,12 +296,22 @@ check_path() {
     fi
 }
 
+create_make_sh() {
+    echo "making "${1}/make.sh""
+    cat > "${1}/make.sh" << EOF
+mkdir -p build
+cd build
+cmake ..
+make
+EOF
+chmod a+x "${1}/make.sh"
+}
 # Runtime start
 # Get the arguments, which should be project path(s)
 projects=()
 do_swd=0
 do_cpp=0
-users_name="<YOU>"
+users_name="greg@agilefrontiers.com"
 proj_version="1.0.0"
 next_is_arg=0
 last_arg=""

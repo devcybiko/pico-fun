@@ -1,2 +1,0 @@
-/Users/greg/git/pico-fun/hello_world/CMakeFiles/edit_cache.dir
-/Users/greg/git/pico-fun/hello_world/CMakeFiles/rebuild_cache.dir

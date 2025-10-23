@@ -1,4 +1,9 @@
 # Pico Fun
+
+- *** DEPRECATED *** USE THE pico-docker project
+- *** DEPRECATED *** this project is podman and RP2040 specific
+- *** DEPRECATED *** pico-docker is designed for either podman /docker and 2040 / 2350
+
 - a docker example using debian and raspberry pi sdk
 - to create a development environment
 - (well, PodMan, actually)
@@ -159,3 +164,10 @@ Add the paths to your include files to the "includePath" setting. Paths are rela
 - If you get problems with "Error statfs no such file or directory"
     - be sure to specify `-v /Volumes/GregsGit`
     - podman machine init podman-machine-default -v /Volumes/GregsGit
+
+## ~/bin scripts
+
+- deploy.sh
+- pdeploy
+- zshrc/210-brew.zsh
+= zshrc/410-pico.zsh
